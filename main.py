@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import math
+import classes
 
 # Screen constants
 FPS = 100
@@ -20,6 +21,12 @@ background = pygame.Surface((screen_size_x, screen_size_y))
 
 background.fill(pygame.Color('#000000'))
 
+
+test_ship = classes.Ship(5,5)
+print(f'total mass: {test_ship.stats.mass}')
+print(f'engines mass: {test_ship.engines.stats.mass}')
+print(f'chassis mass: {test_ship.chassis.stats.mass}')
+
 # Main Game Loop.
 clock = pygame.time.Clock()
 is_running = True
@@ -33,9 +40,9 @@ while is_running:
         ### Keydown loop ###
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT and event.mod == pygame.KMOD_NONE:
-                print('K_RIGHT')
+                test_ship.engines.propulsion.power_move_right()
             if event.key == pygame.K_RIGHT and event.mod & pygame.KMOD_LSHIFT:
-                print('K_RIGHT + LEFT SHIFT!')
+                test_ship.engines.propulsion.power_rotate_right()
             if event.key == pygame.K_LEFT:
                 print('K_LEFT')
             if event.key == pygame.K_UP:
